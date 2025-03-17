@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Sortable Person List</title>
+</head>
+<body>
+    <h1>Person List</h1>
+    <a href="{% url 'insert' %}"><button>Insert Random Data</button></a>
+
+    <!-- Sorting Form -->
+    <form method="GET">
+        <label for="sort">Sort by:</label>
+        <select name="sort">
+            <option value="name" {% if sort_by == 'name' %}selected{% endif %}>Name</option>
+            <option value="age" {% if sort_by == 'age' %}selected{% endif %}>Age</option>
+            <option value="email" {% if sort_by == 'email' %}selected{% endif %}>Email</option>
+        </select>
+
+        <label for="order">Order:</label>
+        <select name="order">
+            <option value="asc" {% if order == 'asc' %}selected{% endif %}>Ascending</option>
+            <option value="desc" {% if order == 'desc' %}selected{% endif %}>Descending</option>
+        </select>
+        <button type="submit">Sort</button>
+    </form>
+
+    <!-- Displaying Person List -->
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+        </tr>
+        {% for person in persons %}
+        <tr>
+            <td>{{ person.name }}</td>
+            <td>{{ person.age }}</td>
+            <td>{{ person.email }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
